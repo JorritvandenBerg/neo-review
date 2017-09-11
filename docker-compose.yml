@@ -1,0 +1,22 @@
+version: "3.3"
+
+services:
+    mysql:
+        build: ./mysql
+        volumes:
+            - mysql_data:/var/lib/mysql
+        env_file:
+            - ./secrets.env
+        restart: always
+
+    reviewboard:
+        build: ./reviewboard
+        env_file:
+            - ./common.env
+            - ./secrets.env
+        ports:
+            - 80:80
+        restart: always
+
+volumes:
+    mysql_data: 
